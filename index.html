@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACCESS NODE</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:#05070b;
+  color:#dce3ea;
+  font-family:monospace;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+#app{
+  width:min(720px,92%);
+  padding:35px 25px;
+  border:1px solid #263341;
+  background:#090d13;
+  box-shadow:0 0 40px #000;
+}
+h1{color:#54ff9a;letter-spacing:5px}
+h2{color:#70b7ff}
+p{line-height:1.7}
+input,button{
+  font:inherit;
+  padding:13px;
+  margin-top:12px;
+  background:#0d141c;
+  color:#fff;
+  border:1px solid #405365;
+}
+input{width:100%}
+button{
+  cursor:pointer;
+  border-color:#54ff9a;
+  color:#54ff9a;
+}
+button:hover{background:#10251a}
+.hidden{display:none}
+.error{color:#ff6262}
+.success{color:#54ff9a}
+.small{color:#687887;font-size:12px}
+</style>
+</head>
+
+<body>
+<div id="app">
+
+<div id="screen1">
+<h1>ACCESS NODE</h1>
+<p>Connection established.</p>
+<p class="small">Three security layers detected.</p>
+
+<p>
+A six-character access key is required.
+The system has left a fragment of the key below:
+</p>
+
+<pre>
+4 9 16 25 36 ?
+</pre>
+
+<p>
+Find the missing number. Then convert that number
+to its position in the alphabet.
+</p>
+
+<input id="answer1" placeholder="enter access key">
+<button onclick="level1()">AUTHENTICATE</button>
+<p id="msg1"></p>
+</div>
+
+
+<div id="screen2" class="hidden">
+<h1>LEVEL 02</h1>
+
+<p>First gate bypassed.</p>
+
+<p>
+The next system does not ask for the password directly.
+It asks for the answer to a question.
+</p>
+
+<p>
+I speak without a mouth.<br>
+I hear without ears.<br>
+I have no body,<br>
+but I come alive with wind.
+</p>
+
+<p class="small">
+Your answer is not the password.
+Take the number of letters in the answer,
+then multiply it by 7.
+</p>
+
+<input id="answer2" placeholder="enter number">
+<button onclick="level2()">CONTINUE</button>
+<p id="msg2"></p>
+</div>
+
+
+<div id="screen3" class="hidden">
+<h1>LEVEL 03</h1>
+
+<p>Interesting.</p>
+
+<p>
+The final lock uses a sequence.
+Do not rush.
+</p>
+
+<pre>
+1
+11
+21
+1211
+111221
+?
+</pre>
+
+<p>
+Enter the next line exactly as numbers.
+</p>
+
+<input id="answer3" placeholder="enter sequence">
+<button onclick="level3()">BREAK THE LOCK</button>
+<p id="msg3"></p>
+</div>
+
+
+<div id="final" class="hidden">
+<h1 class="success">ACCESS GRANTED</h1>
+
+<p>
+Security architecture compromised.
+</p>
+
+<p>
+All three layers have been successfully bypassed.
+</p>
+
+<hr>
+
+<h2>CONGRATULATIONS.</h2>
+
+<p>
+You have officially won:
+</p>
+
+<h1>5 MINUTES OF NECK MASSAGE</h1>
+
+<p class="small">
+Reward authorized. No refunds. No exchanges.
+</p>
+</div>
+
+</div>
+
+<script>
+
+function show(id){
+  document.querySelectorAll('#app > div').forEach(x=>x.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function level1(){
+  let a=document.getElementById("answer1").value.trim().toLowerCase();
+
+  if(a==="g"){
+    show("screen2");
+  }else{
+    document.getElementById("msg1").innerHTML=
+      "<span class='error'>ACCESS DENIED.</span>";
+  }
+}
+
+function level2(){
+  let a=document.getElementById("answer2").value.trim();
+
+  if(a==="35"){
+    show("screen3");
+  }else{
+    document.getElementById("msg2").innerHTML=
+      "<span class='error'>WRONG CALCULATION.</span>";
+  }
+}
+
+function level3(){
+  let a=document.getElementById("answer3").value.trim();
+
+  if(a==="312211"){
+    show("final");
+  }else{
+    document.getElementById("msg3").innerHTML=
+      "<span class='error'>FINAL LOCK REJECTED.</span>";
+  }
+}
+
+</script>
+
+</body>
+</html>
