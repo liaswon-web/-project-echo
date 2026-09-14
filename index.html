@@ -2,398 +2,209 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SECURITY // THREE LAYERS</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NODE // 04</title>
 <style>
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:#080b10;
-  color:#d7e0e8;
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-
-.wrap{
-  max-width:760px;
-  margin:auto;
-  padding:28px 18px 60px;
-}
-
-.top{
-  border:1px solid #26323d;
-  padding:18px;
-  background:#0d1218;
-  margin-bottom:18px;
-}
-
-h1{
-  font-size:20px;
-  letter-spacing:2px;
-  margin:0 0 8px;
-}
-
-h2{
-  font-size:18px;
-  margin:5px 0 12px;
-}
-
-p{
-  line-height:1.55;
-  font-size:14px;
-}
-
-.muted{
-  color:#71808c;
-  font-size:13px;
-}
-
-.level{
-  display:none;
-  border:1px solid #26323d;
-  background:#0d1218;
-  padding:20px;
-}
-
-.level.active{
-  display:block;
-}
-
-.badge{
-  display:inline-block;
-  border:1px solid #3a4854;
-  padding:4px 8px;
-  font-size:11px;
-  color:#8fa2af;
-  margin-bottom:12px;
-}
-
-pre{
-  white-space:pre-wrap;
-  background:#07090d;
-  border:1px solid #202a33;
-  padding:15px;
-  overflow:auto;
-  color:#c5d0d8;
-  line-height:1.55;
-}
-
-input{
-  width:100%;
-  background:#07090d;
-  color:#e5edf2;
-  border:1px solid #34414c;
-  padding:12px;
-  font:inherit;
-  margin:8px 0;
-}
-
-button{
-  background:#d7e0e8;
-  color:#080b10;
-  border:0;
-  padding:11px 16px;
-  font:inherit;
-  font-weight:700;
-  cursor:pointer;
-  margin-top:5px;
-}
-
-button:hover{
-  opacity:.85;
-}
-
-.msg{
-  min-height:22px;
-  margin-top:12px;
-  font-size:13px;
-}
-
-.ok{
-  color:#76d69a;
-}
-
-.err{
-  color:#e77979;
-}
-
-.small{
-  font-size:12px;
-  color:#647480;
-}
-
-.final{
-  text-align:center;
-  padding:25px;
-}
-
-.final h2{
-  font-size:24px;
-}
+body{margin:0;background:#080b10;color:#d7e0e8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+main{max-width:850px;margin:auto;padding:28px 18px 70px}
+header,.box{border:1px solid #26323d;padding:28px;margin-bottom:22px;background:#0d1117}
+h1{letter-spacing:5px;font-size:32px;margin:0 0 12px}
+h2{font-size:24px}
+.sub{color:#73818e}
+.tag{display:inline-block;border:1px solid #344452;padding:8px 12px;color:#8c9baa}
+pre,.data{background:#05070a;border:1px solid #202a33;padding:18px;overflow:auto;line-height:1.65}
+input{width:100%;padding:15px;background:#05070a;border:1px solid #344452;color:#fff;font:inherit;margin:12px 0}
+button{padding:14px 22px;background:#d7e0e8;border:0;font:bold 16px monospace;cursor:pointer}
+.msg{margin-top:14px;min-height:24px}
+.good{color:#72e6a8}.bad{color:#ff6b6b}
+.hidden{display:none}
+small{color:#657482}
 </style>
 </head>
 
 <body>
+<main>
 
-<div class="wrap">
+<header>
+<div class="tag">NODE // 04</div>
+<h1>ISOLATED DIAGNOSTIC ENVIRONMENT</h1>
+<div class="sub">SESSION 04 · 4 LAYERS · NO EXTERNAL ACCESS</div>
+</header>
 
-<div class="top">
-<h1>SECURITY // THREE LAYERS</h1>
-<div class="muted">
-TRAINING ENVIRONMENT · 3 CHALLENGES
-</div>
-</div>
+<section class="box">
+<div class="tag">01 // THE NOISE</div>
+<h2>Nothing is where it should be.</h2>
+<p>The monitor captured a damaged memory block.</p>
 
+<pre id="hex">
+7f 45 4c 46 02 01 01 00 00 00 00 00
+00 00 00 00 02 00 3e 00 01 00 00 00
+40 00 00 00 00 00 00 00 40 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00
+2e 73 68 73 74 72 74 61 62 00 2e 74
+65 78 74 00
+</pre>
 
-<!-- LEVEL 1 -->
-
-<section id="l1" class="level active">
-
-<span class="badge">LEVEL 01 / ENCODING</span>
-
-<h2>Signal</h2>
-
-<p>
-A short message was intercepted.
-It has been encoded, not encrypted.
+<p class="sub">
+The obvious message is bait.<br>
+The first four bytes identify the format. Ignore them.
+The useful fragment is hidden in the section-name bytes.
 </p>
 
-<pre>U0VDT05EQVJZ</pre>
-
-<p>
-Identify the encoding, decode the message and enter the result.
-</p>
-
-<input id="a1" autocomplete="off" placeholder="Enter solution">
-
+<input id="a1" autocomplete="off" placeholder="ENTER NODE 01">
 <button onclick="check1()">VERIFY</button>
-
 <div id="m1" class="msg"></div>
-
 </section>
 
-
-<!-- LEVEL 2 -->
-
-<section id="l2" class="level">
-
-<span class="badge">LEVEL 02 / LOG ANALYSIS</span>
-
-<h2>Noise</h2>
+<section id="l2" class="box hidden">
+<div class="tag">02 // THE MIRROR</div>
+<h2>A number is pretending to be a key.</h2>
 
 <p>
-The following requests were recorded by a server.
-Most entries are noise.
-One IP address appears exactly once.
+The previous node gives you a word. Do not enter it.
+Convert its letters using A1Z26, then apply:
 </p>
 
-<pre>
-10.4.18.22  GET /index.html
-10.4.18.22  GET /robots.txt
-172.16.4.81  GET /login
-10.4.18.22  GET /assets/app.js
-192.168.7.14  GET /favicon.ico
-10.4.18.22  GET /api/status
-172.16.4.81  GET /session
-10.4.18.22  GET /index.html
-192.168.7.14  GET /assets/main.css
-172.16.4.81  GET /logout
-10.4.18.22  GET /robots.txt
-192.168.7.14  GET /index.html
-10.4.18.22  GET /api/status
-172.16.4.81  GET /login
-10.4.18.22  GET /assets/app.js
-10.9.3.57    GET /cache/9f2a
-10.4.18.22  GET /index.html
-192.168.7.14  GET /favicon.ico
-172.16.4.81  GET /session
-10.4.18.22  GET /robots.txt
+<pre>FIRST + LAST
+SECOND + SECOND-LAST
+MIDDLE + MIDDLE</pre>
+
+<p>
+The result is a three-digit value.
+A decoy value is deliberately visible below.
+</p>
+
+<pre>314
+271
+508
+613
+905
 </pre>
 
-<p>
-Take the last two digits of the unique IP address.
-Treat them as a decimal number and calculate its remainder when divided by 26.
-</p>
-
-<p>
-Now use that number as a Caesar shift.
-The following numbers represent letters A=1, B=2 ... Z=26.
-Shift every number backwards by the calculated amount.
-</p>
-
-<pre>
-24 - 13 - 14 - 11 - 25
-</pre>
-
-<input id="a2" autocomplete="off" placeholder="Enter solution">
-
+<input id="a2" autocomplete="off" placeholder="ENTER NODE 02">
 <button onclick="check2()">VERIFY</button>
-
 <div id="m2" class="msg"></div>
-
 </section>
 
-
-<!-- LEVEL 3 -->
-
-<section id="l3" class="level">
-
-<span class="badge">LEVEL 03 / LOGIC</span>
-
-<h2>Last Gate</h2>
+<section id="l3" class="box hidden">
+<div class="tag">03 // THE GHOST</div>
+<h2>The terminal is lying.</h2>
 
 <p>
-Three terminals produced authentication logs.
-Only one follows the system rule.
+A diagnostic routine returned the following:
+</p>
+
+<pre id="terminal">
+[OK] memory
+[OK] kernel
+[WARN] identity mismatch
+[OK] checksum
+[ERR] 73
+[OK] 68
+[ERR] 65
+[OK] 64
+[ERR] 6f
+[OK] 77
+</pre>
+
+<p class="sub">
+Only the values marked ERR matter.
+They are hexadecimal bytes.
+Decode them, then reverse the result.
+</p>
+
+<input id="a3" autocomplete="off" placeholder="ENTER NODE 03">
+<button onclick="check3()">VERIFY</button>
+<div id="m3" class="msg"></div>
+</section>
+
+<section id="l4" class="box hidden">
+<div class="tag">04 // THE LAST LOCK</div>
+<h2>One final transformation.</h2>
+
+<p>
+The previous answer is not the password.
+Take its characters and shift each alphabetic character
+<strong>one position backward</strong>.
+Then read only the characters in odd positions.
 </p>
 
 <pre>
-TERMINAL A
-
-08:41  AUTH OK
-08:45  TOKEN: 4
-08:46  SESSION CLOSED
-
-
-TERMINAL B
-
-08:41  AUTH OK
-08:50  TOKEN: 9
-08:51  SESSION CLOSED
-
-
-TERMINAL C
-
-08:41  AUTH OK
-08:47  TOKEN: 6
-08:48  SESSION CLOSED
+POSITION:  1 2 3 4 5 6 7 8
+KEEP:      X   X   X   X
 </pre>
 
-<p>
-Rule:
-the authentic terminal is the one where the TOKEN number,
-added to minute 41, equals the minute in which the token appeared.
+<p class="sub">
+Case does not matter. Spaces do.
 </p>
 
-<p>
-Once you find the authentic terminal, add its terminal number
-(A=1, B=2, C=3) to its TOKEN value.
-</p>
-
-<input id="a3" autocomplete="off" placeholder="Enter the number">
-
-<button onclick="check3()">VERIFY</button>
-
-<div id="m3" class="msg"></div>
-
+<input id="a4" autocomplete="off" placeholder="ENTER FINAL KEY">
+<button onclick="check4()">VERIFY</button>
+<div id="m4" class="msg"></div>
 </section>
 
-
-<!-- FINAL -->
-
-<section id="final" class="level final">
-
-<span class="badge">ACCESS GRANTED</span>
-
-<h2>TEST COMPLETED</h2>
-
+<section id="final" class="box hidden">
+<div class="tag">ACCESS GRANTED</div>
+<h2>NODE // 04 COMPLETE</h2>
 <p>
-All three security layers have been successfully cleared.
+All four diagnostic layers have been successfully cleared.
 </p>
-
-<p class="small">
-End of training environment.
+<h2>BRAVO.</h2>
+<p>
+You found the path through the noise.<br>
+<strong>Continua così.</strong>
 </p>
-
+<small>END OF TRAINING ENVIRONMENT</small>
 </section>
 
-</div>
-
+</main>
 
 <script>
+const $=id=>document.getElementById(id);
 
-function show(id){
-  document.querySelectorAll('.level').forEach(
-    x => x.classList.remove('active')
-  );
-
-  document.getElementById(id).classList.add('active');
+function ok(id,t){
+ $(id).textContent=t;
+ $(id).className="msg good";
 }
 
-function result(id,ok,text){
-  const e=document.getElementById(id);
-
-  e.className='msg '+(ok?'ok':'err');
-
-  e.textContent=text;
+function no(id){
+ $(id).textContent="ACCESS DENIED";
+ $(id).className="msg bad";
 }
-
 
 function check1(){
-
-  const v=document
-    .getElementById('a1')
-    .value
-    .trim()
-    .toUpperCase();
-
-  if(v==='SECONDARY'){
-
-    result('m1',true,'ACCESS ACCEPTED');
-
-    show('l2');
-
-  }else{
-
-    result('m1',false,'ACCESS DENIED');
-
-  }
+ let v=$("a1").value.trim().toLowerCase();
+ if(v==="text"){
+   ok("m1","ACCESS ACCEPTED");
+   $("l2").classList.remove("hidden");
+ }else no("m1");
 }
-
 
 function check2(){
-
-  const v=document
-    .getElementById('a2')
-    .value
-    .trim()
-    .toUpperCase();
-
-  if(v==='SHIFT'){
-
-    result('m2',true,'ACCESS ACCEPTED');
-
-    show('l3');
-
-  }else{
-
-    result('m2',false,'ACCESS DENIED');
-
-  }
+ let v=$("a2").value.trim();
+ if(v==="613"){
+   ok("m2","ACCESS ACCEPTED");
+   $("l3").classList.remove("hidden");
+ }else no("m2");
 }
-
 
 function check3(){
-
-  const v=document
-    .getElementById('a3')
-    .value
-    .trim();
-
-  if(v==='5'){
-
-    result('m3',true,'ACCESS ACCEPTED');
-
-    show('final');
-
-  }else{
-
-    result('m3',false,'ACCESS DENIED');
-
-  }
+ let v=$("a3").value.trim().toLowerCase();
+ if(v==="wohs"){
+   ok("m3","ACCESS ACCEPTED");
+   $("l4").classList.remove("hidden");
+ }else no("m3");
 }
 
+function check4(){
+ let v=$("a4").value.trim().toLowerCase();
+ if(v==="vn"){
+   ok("m4","ACCESS ACCEPTED");
+   $("final").classList.remove("hidden");
+ }else no("m4");
+}
 </script>
 
 </body>
