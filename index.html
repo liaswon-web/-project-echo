@@ -3,203 +3,394 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACCESS NODE</title>
+<title>SECURITY // THREE LAYERS</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
-  min-height:100vh;
-  background:#05070b;
-  color:#dce3ea;
-  font-family:monospace;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  background:#080b10;
+  color:#d7e0e8;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
 }
-#app{
-  width:min(720px,92%);
-  padding:35px 25px;
-  border:1px solid #263341;
-  background:#090d13;
-  box-shadow:0 0 40px #000;
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:28px 18px 60px;
 }
-h1{color:#54ff9a;letter-spacing:5px}
-h2{color:#70b7ff}
-p{line-height:1.7}
-input,button{
+
+.top{
+  border:1px solid #26323d;
+  padding:18px;
+  background:#0d1218;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:20px;
+  letter-spacing:2px;
+  margin:0 0 8px;
+}
+
+h2{
+  font-size:18px;
+  margin:5px 0 12px;
+}
+
+p{
+  line-height:1.55;
+  font-size:14px;
+}
+
+.muted{
+  color:#71808c;
+  font-size:13px;
+}
+
+.level{
+  display:none;
+  border:1px solid #26323d;
+  background:#0d1218;
+  padding:20px;
+}
+
+.level.active{
+  display:block;
+}
+
+.badge{
+  display:inline-block;
+  border:1px solid #3a4854;
+  padding:4px 8px;
+  font-size:11px;
+  color:#8fa2af;
+  margin-bottom:12px;
+}
+
+pre{
+  white-space:pre-wrap;
+  background:#07090d;
+  border:1px solid #202a33;
+  padding:15px;
+  overflow:auto;
+  color:#c5d0d8;
+  line-height:1.55;
+}
+
+input{
+  width:100%;
+  background:#07090d;
+  color:#e5edf2;
+  border:1px solid #34414c;
+  padding:12px;
   font:inherit;
-  padding:13px;
-  margin-top:12px;
-  background:#0d141c;
-  color:#fff;
-  border:1px solid #405365;
+  margin:8px 0;
 }
-input{width:100%}
+
 button{
+  background:#d7e0e8;
+  color:#080b10;
+  border:0;
+  padding:11px 16px;
+  font:inherit;
+  font-weight:700;
   cursor:pointer;
-  border-color:#54ff9a;
-  color:#54ff9a;
+  margin-top:5px;
 }
-button:hover{background:#10251a}
-.hidden{display:none}
-.error{color:#ff6262}
-.success{color:#54ff9a}
-.small{color:#687887;font-size:12px}
+
+button:hover{
+  opacity:.85;
+}
+
+.msg{
+  min-height:22px;
+  margin-top:12px;
+  font-size:13px;
+}
+
+.ok{
+  color:#76d69a;
+}
+
+.err{
+  color:#e77979;
+}
+
+.small{
+  font-size:12px;
+  color:#647480;
+}
+
+.final{
+  text-align:center;
+  padding:25px;
+}
+
+.final h2{
+  font-size:24px;
+}
 </style>
 </head>
 
 <body>
-<div id="app">
 
-<div id="screen1">
-<h1>ACCESS NODE</h1>
-<p>Connection established.</p>
-<p class="small">Three security layers detected.</p>
+<div class="wrap">
+
+<div class="top">
+<h1>SECURITY // THREE LAYERS</h1>
+<div class="muted">
+TRAINING ENVIRONMENT · 3 CHALLENGES
+</div>
+</div>
+
+
+<!-- LEVEL 1 -->
+
+<section id="l1" class="level active">
+
+<span class="badge">LEVEL 01 / ENCODING</span>
+
+<h2>Signal</h2>
 
 <p>
-A six-character access key is required.
-The system has left a fragment of the key below:
+A short message was intercepted.
+It has been encoded, not encrypted.
+</p>
+
+<pre>U0VDT05EQVJZ</pre>
+
+<p>
+Identify the encoding, decode the message and enter the result.
+</p>
+
+<input id="a1" autocomplete="off" placeholder="Enter solution">
+
+<button onclick="check1()">VERIFY</button>
+
+<div id="m1" class="msg"></div>
+
+</section>
+
+
+<!-- LEVEL 2 -->
+
+<section id="l2" class="level">
+
+<span class="badge">LEVEL 02 / LOG ANALYSIS</span>
+
+<h2>Noise</h2>
+
+<p>
+The following requests were recorded by a server.
+Most entries are noise.
+One IP address appears exactly once.
 </p>
 
 <pre>
-4 9 16 25 36 ?
+10.4.18.22  GET /index.html
+10.4.18.22  GET /robots.txt
+172.16.4.81  GET /login
+10.4.18.22  GET /assets/app.js
+192.168.7.14  GET /favicon.ico
+10.4.18.22  GET /api/status
+172.16.4.81  GET /session
+10.4.18.22  GET /index.html
+192.168.7.14  GET /assets/main.css
+172.16.4.81  GET /logout
+10.4.18.22  GET /robots.txt
+192.168.7.14  GET /index.html
+10.4.18.22  GET /api/status
+172.16.4.81  GET /login
+10.4.18.22  GET /assets/app.js
+10.9.3.57    GET /cache/9f2a
+10.4.18.22  GET /index.html
+192.168.7.14  GET /favicon.ico
+172.16.4.81  GET /session
+10.4.18.22  GET /robots.txt
 </pre>
 
 <p>
-Find the missing number. Then convert that number
-to its position in the alphabet.
-</p>
-
-<input id="answer1" placeholder="enter access key">
-<button onclick="level1()">AUTHENTICATE</button>
-<p id="msg1"></p>
-</div>
-
-
-<div id="screen2" class="hidden">
-<h1>LEVEL 02</h1>
-
-<p>First gate bypassed.</p>
-
-<p>
-The next system does not ask for the password directly.
-It asks for the answer to a question.
+Take the last two digits of the unique IP address.
+Treat them as a decimal number and calculate its remainder when divided by 26.
 </p>
 
 <p>
-I speak without a mouth.<br>
-I hear without ears.<br>
-I have no body,<br>
-but I come alive with wind.
-</p>
-
-<p class="small">
-Your answer is not the password.
-Take the number of letters in the answer,
-then multiply it by 7.
-</p>
-
-<input id="answer2" placeholder="enter number">
-<button onclick="level2()">CONTINUE</button>
-<p id="msg2"></p>
-</div>
-
-
-<div id="screen3" class="hidden">
-<h1>LEVEL 03</h1>
-
-<p>Interesting.</p>
-
-<p>
-The final lock uses a sequence.
-Do not rush.
+Now use that number as a Caesar shift.
+The following numbers represent letters A=1, B=2 ... Z=26.
+Shift every number backwards by the calculated amount.
 </p>
 
 <pre>
-1
-11
-21
-1211
-111221
-?
+24 - 13 - 14 - 11 - 25
+</pre>
+
+<input id="a2" autocomplete="off" placeholder="Enter solution">
+
+<button onclick="check2()">VERIFY</button>
+
+<div id="m2" class="msg"></div>
+
+</section>
+
+
+<!-- LEVEL 3 -->
+
+<section id="l3" class="level">
+
+<span class="badge">LEVEL 03 / LOGIC</span>
+
+<h2>Last Gate</h2>
+
+<p>
+Three terminals produced authentication logs.
+Only one follows the system rule.
+</p>
+
+<pre>
+TERMINAL A
+
+08:41  AUTH OK
+08:45  TOKEN: 4
+08:46  SESSION CLOSED
+
+
+TERMINAL B
+
+08:41  AUTH OK
+08:50  TOKEN: 9
+08:51  SESSION CLOSED
+
+
+TERMINAL C
+
+08:41  AUTH OK
+08:47  TOKEN: 6
+08:48  SESSION CLOSED
 </pre>
 
 <p>
-Enter the next line exactly as numbers.
-</p>
-
-<input id="answer3" placeholder="enter sequence">
-<button onclick="level3()">BREAK THE LOCK</button>
-<p id="msg3"></p>
-</div>
-
-
-<div id="final" class="hidden">
-<h1 class="success">ACCESS GRANTED</h1>
-
-<p>
-Security architecture compromised.
+Rule:
+the authentic terminal is the one where the TOKEN number,
+added to minute 41, equals the minute in which the token appeared.
 </p>
 
 <p>
-All three layers have been successfully bypassed.
+Once you find the authentic terminal, add its terminal number
+(A=1, B=2, C=3) to its TOKEN value.
 </p>
 
-<hr>
+<input id="a3" autocomplete="off" placeholder="Enter the number">
 
-<h2>CONGRATULATIONS.</h2>
+<button onclick="check3()">VERIFY</button>
+
+<div id="m3" class="msg"></div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section id="final" class="level final">
+
+<span class="badge">ACCESS GRANTED</span>
+
+<h2>TEST COMPLETED</h2>
 
 <p>
-You have officially won:
+All three security layers have been successfully cleared.
 </p>
-
-<h1>5 MINUTES OF NECK MASSAGE</h1>
 
 <p class="small">
-Reward authorized. No refunds. No exchanges.
+End of training environment.
 </p>
-</div>
+
+</section>
 
 </div>
+
 
 <script>
 
 function show(id){
-  document.querySelectorAll('#app > div').forEach(x=>x.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+  document.querySelectorAll('.level').forEach(
+    x => x.classList.remove('active')
+  );
+
+  document.getElementById(id).classList.add('active');
 }
 
-function level1(){
-  let a=document.getElementById("answer1").value.trim().toLowerCase();
+function result(id,ok,text){
+  const e=document.getElementById(id);
 
-  if(a==="g"){
-    show("screen2");
+  e.className='msg '+(ok?'ok':'err');
+
+  e.textContent=text;
+}
+
+
+function check1(){
+
+  const v=document
+    .getElementById('a1')
+    .value
+    .trim()
+    .toUpperCase();
+
+  if(v==='SECONDARY'){
+
+    result('m1',true,'ACCESS ACCEPTED');
+
+    show('l2');
+
   }else{
-    document.getElementById("msg1").innerHTML=
-      "<span class='error'>ACCESS DENIED.</span>";
+
+    result('m1',false,'ACCESS DENIED');
+
   }
 }
 
-function level2(){
-  let a=document.getElementById("answer2").value.trim();
 
-  if(a==="35"){
-    show("screen3");
+function check2(){
+
+  const v=document
+    .getElementById('a2')
+    .value
+    .trim()
+    .toUpperCase();
+
+  if(v==='SHIFT'){
+
+    result('m2',true,'ACCESS ACCEPTED');
+
+    show('l3');
+
   }else{
-    document.getElementById("msg2").innerHTML=
-      "<span class='error'>WRONG CALCULATION.</span>";
+
+    result('m2',false,'ACCESS DENIED');
+
   }
 }
 
-function level3(){
-  let a=document.getElementById("answer3").value.trim();
 
-  if(a==="312211"){
-    show("final");
+function check3(){
+
+  const v=document
+    .getElementById('a3')
+    .value
+    .trim();
+
+  if(v==='5'){
+
+    result('m3',true,'ACCESS ACCEPTED');
+
+    show('final');
+
   }else{
-    document.getElementById("msg3").innerHTML=
-      "<span class='error'>FINAL LOCK REJECTED.</span>";
+
+    result('m3',false,'ACCESS DENIED');
+
   }
 }
 
