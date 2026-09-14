@@ -1,210 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NODE // 04</title>
+
+<title>NODE // 01</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#080b10;color:#d7e0e8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-main{max-width:850px;margin:auto;padding:28px 18px 70px}
-header,.box{border:1px solid #26323d;padding:28px;margin-bottom:22px;background:#0d1117}
-h1{letter-spacing:5px;font-size:32px;margin:0 0 12px}
-h2{font-size:24px}
-.sub{color:#73818e}
-.tag{display:inline-block;border:1px solid #344452;padding:8px 12px;color:#8c9baa}
-pre,.data{background:#05070a;border:1px solid #202a33;padding:18px;overflow:auto;line-height:1.65}
-input{width:100%;padding:15px;background:#05070a;border:1px solid #344452;color:#fff;font:inherit;margin:12px 0}
-button{padding:14px 22px;background:#d7e0e8;border:0;font:bold 16px monospace;cursor:pointer}
-.msg{margin-top:14px;min-height:24px}
-.good{color:#72e6a8}.bad{color:#ff6b6b}
-.hidden{display:none}
-small{color:#657482}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#080b10;
+  color:#d7e0e8;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+main{
+  max-width:760px;
+  margin:auto;
+  padding:28px 18px 70px;
+}
+
+.box{
+  border:1px solid #26323d;
+  padding:28px;
+  margin-top:20px;
+  background:#0d1117;
+}
+
+.tag{
+  display:inline-block;
+  border:1px solid #344452;
+  padding:8px 12px;
+  color:#8c9baa;
+}
+
+h1{
+  letter-spacing:5px;
+  font-size:30px;
+  margin:16px 0;
+}
+
+.sub{
+  color:#73818e;
+  line-height:1.7;
+}
+
+pre{
+  background:#05070a;
+  border:1px solid #202a33;
+  padding:18px;
+  line-height:1.8;
+  white-space:pre-wrap;
+}
+
+input{
+  width:100%;
+  padding:15px;
+  background:#05070a;
+  border:1px solid #344452;
+  color:#fff;
+  font:inherit;
+  margin:12px 0;
+}
+
+button{
+  padding:14px 22px;
+  background:#d7e0e8;
+  border:0;
+  font:bold 16px monospace;
+  cursor:pointer;
+}
+
+.msg{
+  margin-top:14px;
+  min-height:24px;
+}
+
+.good{
+  color:#72e6a8;
+}
+
+.bad{
+  color:#ff6b6b;
+}
+
+.hidden{
+  display:none;
+}
 </style>
 </head>
 
 <body>
+
 <main>
 
-<header>
-<div class="tag">NODE // 04</div>
-<h1>ISOLATED DIAGNOSTIC ENVIRONMENT</h1>
-<div class="sub">SESSION 04 · 4 LAYERS · NO EXTERNAL ACCESS</div>
-</header>
-
 <section class="box">
-<div class="tag">01 // THE NOISE</div>
-<h2>Nothing is where it should be.</h2>
-<p>The monitor captured a damaged memory block.</p>
 
-<pre id="hex">
-7f 45 4c 46 02 01 01 00 00 00 00 00
-00 00 00 00 02 00 3e 00 01 00 00 00
-40 00 00 00 00 00 00 00 40 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00
-2e 73 68 73 74 72 74 61 62 00 2e 74
-65 78 74 00
-</pre>
+<div class="tag">NODE // 01</div>
+
+<h1>THE SIGNAL</h1>
 
 <p class="sub">
-The obvious message is bait.<br>
-The first four bytes identify the format. Ignore them.
-The useful fragment is hidden in the section-name bytes.
-</p>
-
-<input id="a1" autocomplete="off" placeholder="ENTER NODE 01">
-<button onclick="check1()">VERIFY</button>
-<div id="m1" class="msg"></div>
-</section>
-
-<section id="l2" class="box hidden">
-<div class="tag">02 // THE MIRROR</div>
-<h2>A number is pretending to be a key.</h2>
-
-<p>
-The previous node gives you a word. Do not enter it.
-Convert its letters using A1Z26, then apply:
-</p>
-
-<pre>FIRST + LAST
-SECOND + SECOND-LAST
-MIDDLE + MIDDLE</pre>
-
-<p>
-The result is a three-digit value.
-A decoy value is deliberately visible below.
-</p>
-
-<pre>314
-271
-508
-613
-905
-</pre>
-
-<input id="a2" autocomplete="off" placeholder="ENTER NODE 02">
-<button onclick="check2()">VERIFY</button>
-<div id="m2" class="msg"></div>
-</section>
-
-<section id="l3" class="box hidden">
-<div class="tag">03 // THE GHOST</div>
-<h2>The terminal is lying.</h2>
-
-<p>
-A diagnostic routine returned the following:
-</p>
-
-<pre id="terminal">
-[OK] memory
-[OK] kernel
-[WARN] identity mismatch
-[OK] checksum
-[ERR] 73
-[OK] 68
-[ERR] 65
-[OK] 64
-[ERR] 6f
-[OK] 77
-</pre>
-
-<p class="sub">
-Only the values marked ERR matter.
-They are hexadecimal bytes.
-Decode them, then reverse the result.
-</p>
-
-<input id="a3" autocomplete="off" placeholder="ENTER NODE 03">
-<button onclick="check3()">VERIFY</button>
-<div id="m3" class="msg"></div>
-</section>
-
-<section id="l4" class="box hidden">
-<div class="tag">04 // THE LAST LOCK</div>
-<h2>One final transformation.</h2>
-
-<p>
-The previous answer is not the password.
-Take its characters and shift each alphabetic character
-<strong>one position backward</strong>.
-Then read only the characters in odd positions.
+Un segnale è stato frammentato.<br>
+I numeri indicano l'ordine originale.
 </p>
 
 <pre>
-POSITION:  1 2 3 4 5 6 7 8
-KEEP:      X   X   X   X
+[06] GHOST
+[03] RIVER
+[08] ORBIT
+[01] CLOUD
+[05] GARDEN
+[07] INK
+[04] APPLE
+[02] OCEAN
 </pre>
 
 <p class="sub">
-Case does not matter. Spaces do.
+Riordina i frammenti dal numero più piccolo al più grande.<br>
+Poi prendi <strong>la prima lettera</strong> di ogni parola.<br><br>
+Inserisci la parola ottenuta.
 </p>
 
-<input id="a4" autocomplete="off" placeholder="ENTER FINAL KEY">
-<button onclick="check4()">VERIFY</button>
-<div id="m4" class="msg"></div>
+<input
+  id="answer"
+  autocomplete="off"
+  autocapitalize="none"
+  spellcheck="false"
+  placeholder="ENTER KEY"
+>
+
+<button id="verify">VERIFY</button>
+
+<div id="msg" class="msg"></div>
+
 </section>
 
+
 <section id="final" class="box hidden">
+
 <div class="tag">ACCESS GRANTED</div>
-<h2>NODE // 04 COMPLETE</h2>
-<p>
-All four diagnostic layers have been successfully cleared.
-</p>
+
 <h2>BRAVO.</h2>
-<p>
-You found the path through the noise.<br>
-<strong>Continua così.</strong>
-</p>
-<small>END OF TRAINING ENVIRONMENT</small>
+
+<p>IO CREDO IN TE ❤️</p>
+
 </section>
 
 </main>
 
+
 <script>
-const $=id=>document.getElementById(id);
 
-function ok(id,t){
- $(id).textContent=t;
- $(id).className="msg good";
+const TARGET =
+"9e4f3c6c3e5f2f9f6f3c0d7a6f6b5f5d6e5c8c9f6f3d0b6a7e7c4a5b6d7e8f9";
+
+async function hash(value){
+
+  const bytes =
+    new TextEncoder().encode(
+      value.trim().toLowerCase()
+    );
+
+  const buffer =
+    await crypto.subtle.digest(
+      "SHA-256",
+      bytes
+    );
+
+  return Array.from(
+    new Uint8Array(buffer)
+  )
+  .map(n =>
+    n.toString(16).padStart(2,"0")
+  )
+  .join("");
 }
 
-function no(id){
- $(id).textContent="ACCESS DENIED";
- $(id).className="msg bad";
-}
 
-function check1(){
- let v=$("a1").value.trim().toLowerCase();
- if(v==="text"){
-   ok("m1","ACCESS ACCEPTED");
-   $("l2").classList.remove("hidden");
- }else no("m1");
-}
+document
+.getElementById("verify")
+.addEventListener("click", async function(){
 
-function check2(){
- let v=$("a2").value.trim();
- if(v==="613"){
-   ok("m2","ACCESS ACCEPTED");
-   $("l3").classList.remove("hidden");
- }else no("m2");
-}
+  const input =
+    document.getElementById("answer").value;
 
-function check3(){
- let v=$("a3").value.trim().toLowerCase();
- if(v==="wohs"){
-   ok("m3","ACCESS ACCEPTED");
-   $("l4").classList.remove("hidden");
- }else no("m3");
-}
+  const result =
+    await hash(input);
 
-function check4(){
- let v=$("a4").value.trim().toLowerCase();
- if(v==="vn"){
-   ok("m4","ACCESS ACCEPTED");
-   $("final").classList.remove("hidden");
- }else no("m4");
-}
+  const msg =
+    document.getElementById("msg");
+
+
+  if(result === TARGET){
+
+    msg.textContent =
+      "ACCESS ACCEPTED";
+
+    msg.className =
+      "msg good";
+
+    document
+      .getElementById("final")
+      .classList.remove("hidden");
+
+  }else{
+
+    msg.textContent =
+      "ACCESS DENIED";
+
+    msg.className =
+      "msg bad";
+
+  }
+
+});
+
 </script>
 
 </body>
